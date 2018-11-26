@@ -1,4 +1,4 @@
-<div>
+<div [hidden]=" mode != 'show' ">
 
   <!-- dl>(dt+dd)*3 -->
   <dl [title]="playlist.name" [attr.data-id]="playlist.id">
@@ -17,13 +17,11 @@
     </dd>
   </dl>
 
+  <input type="button" value="Edit" class="btn btn-info" (click)="edit()">
 </div>
 
 
-<div>
-
-  <!-- .form-group*3>label+input.form-control -->
-
+<div [hidden]="  mode != 'edit'">
   <div class="form-group">
     <label>Name: </label>
     <input type="text" class="form-control" [(ngModel)]="playlist.name">
@@ -39,5 +37,8 @@
     <input type="color" [(ngModel)]="playlist.color">
   </div>
 
+
+  <input type="button" value="Cancel" class="btn btn-danger" (click)="cancel()">
+  <input type="button" value="Save" class="btn btn-success" (click)="save()">
 
 </div>
