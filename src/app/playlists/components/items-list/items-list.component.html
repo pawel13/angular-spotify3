@@ -1,15 +1,13 @@
-
 <div class="list-group">
 
   <div class="list-group-item"
-  [ngClass]="{
-    placki: true,
-    alice: false 
-  }"
-  [class.active]="  i == 1 "
-  
+
+  [class.active]="  selected?.id == playlist.id "
+
+  (click)="selected = playlist"
+
   *ngFor="let playlist of playlists; index as i; trackBy trackFn">
     {{i+1}}. {{playlist.name}}
   </div>
-  
+
 </div>

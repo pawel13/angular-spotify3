@@ -33,6 +33,8 @@ export class ItemsListComponent implements OnInit {
     }
   ];
 
+  selected: Playlist;
+
   constructor() {}
 
   trackFn(index: number, item: Playlist) {
