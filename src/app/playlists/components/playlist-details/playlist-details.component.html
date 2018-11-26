@@ -26,17 +26,25 @@
 
   <div class="form-group">
     <label>Name: </label>
-    <input type="text" class="form-control" [value]="playlist.name">
+    <input type="text" class="form-control" 
+    
+    (input)=" playlist.name = $event.target.value "
+
+    [value]="playlist.name">
   </div>
 
   <div class="form-group">
     <label>Favourite: </label>
-    <input type="checkbox" [checked]="playlist.favourite">
+    <input type="checkbox" 
+    (change)="playlist.favourite = $event.target.checked"
+    [checked]="playlist.favourite">
   </div>
 
   <div class="form-group">
     <label>Color: </label>
-    <input type="color" [value]="playlist.color">
+    <input type="color" 
+    (change)="playlist.color = $event.target.value"
+    [value]="playlist.color">
   </div>
 
 
