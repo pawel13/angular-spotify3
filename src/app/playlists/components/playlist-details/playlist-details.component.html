@@ -1,3 +1,15 @@
-<p>
-  playlist-details works!
-</p>
+<div>
+
+  <!-- dl>(dt+dd)*3 -->
+  <dl>
+    <dt>Name:</dt>
+    <dd>{{playlist.name}}</dd>
+
+    <dt>Favourite</dt>
+    <dd>{{playlist.favourite? 'Yes' : 'No'}}</dd>
+
+    <dt>Color</dt>
+    <dd>{{playlist.color}}</dd>
+  </dl>
+
+</div>
