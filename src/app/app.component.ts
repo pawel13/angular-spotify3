@@ -1,22 +1,14 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
   title = "Hello Angular!";
-  counter = 0;
+  
+  constructor() {
 
-  constructor(private cdr:ChangeDetectorRef) {
-
-    setInterval(() => {
-     
-        this.counter++;
-        cdr.detectChanges()
-     
-    }, 500);
   }
 }
