@@ -3,14 +3,16 @@ import { NgModule, ApplicationRef } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PlaylistsModule
   ],
   providers: [],
   // entryComponents:[AppComponent],
