@@ -33,14 +33,10 @@ export class ItemsListComponent implements OnInit {
     }
   ];
 
-  constructor() {
-    setInterval(() => {
-      this.playlists = JSON.parse(JSON.stringify(this.playlists));
-    }, 500);
-  }
+  constructor() {}
 
-  trackFn(index:number,item:Playlist){
-    return item.id
+  trackFn(index: number, item: Playlist) {
+    return item.id;
   }
 
   ngOnInit() {}
