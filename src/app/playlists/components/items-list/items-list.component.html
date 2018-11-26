@@ -2,6 +2,12 @@
 
 <div class="list-group">
 
+  <div class="list-group-item" *ngFor="let playlist of playlists; index as i; trackBy trackFn">
+    {{i+1}}. {{playlist.name}}
+  </div>
+  
+</div>
+
 <!--   <ng-template ngFor [ngForOf]="playlists" let-playlist let-i="index">
 
     <div class="list-group-item">
@@ -10,9 +16,3 @@
 
   </ng-template>
  -->
-
-  <div class="list-group-item" *ngFor="let playlist of playlists; index as i">
-    {{i+1}}. {{playlist.name}}
-  </div>
-
-</div>

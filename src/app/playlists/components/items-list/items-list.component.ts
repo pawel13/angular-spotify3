@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Playlist } from "src/app/model/Playlist";
 import { NgForOf, NgForOfContext } from "@angular/common";
 
-NgForOf
-NgForOfContext
+NgForOf;
+NgForOfContext;
 
 @Component({
   selector: "app-items-list",
@@ -12,7 +12,6 @@ NgForOfContext
   // encapsulation: ViewEncapsulation.Emulated
 })
 export class ItemsListComponent implements OnInit {
-
   playlists: Playlist[] = [
     {
       id: 123,
@@ -31,11 +30,18 @@ export class ItemsListComponent implements OnInit {
       name: "Best of Angular",
       favourite: false,
       color: "#ffff00"
-    },
+    }
   ];
 
+  constructor() {
+    setInterval(() => {
+      this.playlists = JSON.parse(JSON.stringify(this.playlists));
+    }, 500);
+  }
 
-  constructor() {}
+  trackFn(index:number,item:Playlist){
+    return item.id
+  }
 
   ngOnInit() {}
 }
