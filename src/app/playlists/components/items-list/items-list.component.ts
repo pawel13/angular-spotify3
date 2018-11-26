@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Playlist } from "src/app/model/Playlist";
+import { NgForOf, NgForOfContext } from "@angular/common";
+
+NgForOf
+NgForOfContext
 
 @Component({
   selector: "app-items-list",
