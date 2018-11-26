@@ -1,10 +1,11 @@
 <!-- .row>.col*2 -->
 <div class="row">
   <div class="col">
-    <app-items-list [items]="playlists">
+    <app-items-list [items]="playlists"
+    (selectedChange)=" selected = $event ">
     </app-items-list>
 
-    <!-- <input type="text" [value]="playlist.name"> -->
+    <!-- <input type="text" (change)="$event"> -->
 
   </div>
   <div class="col">

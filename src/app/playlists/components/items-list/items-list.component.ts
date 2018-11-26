@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  Input,
+  EventEmitter,
+  Output
+} from "@angular/core";
 import { Playlist } from "src/app/model/Playlist";
 import { NgForOf, NgForOfContext } from "@angular/common";
 
@@ -8,18 +15,26 @@ NgForOfContext;
 @Component({
   selector: "app-items-list",
   templateUrl: "./items-list.component.html",
-  styleUrls: ["./items-list.component.scss"],
+  styleUrls: ["./items-list.component.scss"]
   // encapsulation: ViewEncapsulation.Emulated
   // inputs:[
   //   'playlists:items'
   // ]
 })
 export class ItemsListComponent implements OnInit {
-
-  @Input('items') 
+  @Input("items")
   playlists: Playlist[];
 
   selected: Playlist;
+
+  @Output()
+  selectedChange = new EventEmitter<Playlist>();
+
+  select(playlist: Playlist) {
+    this.selected = playlist;
+
+    this.selectedChange.emit(playlist);
+  }
 
   constructor() {}
 
