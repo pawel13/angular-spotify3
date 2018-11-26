@@ -1,9 +1,8 @@
-<ng-template [ngIf]=" mode == 'show' " [ngIfThen]="showRef" [ngIfElse]="editRef">
-</ng-template>
+<!-- <ng-template [ngIf]=" mode == 'show' " [ngIfThen]="showRef" [ngIfElse]="editRef">
+</ng-template> -->
 
 
-
-
+<div *ngIf=" mode == 'show';  then showRef; else editRef " class="placki"></div>
 
 
 
