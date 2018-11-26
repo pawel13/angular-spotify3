@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 
 @Component({
   selector: "app-root",
@@ -7,15 +7,15 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "Hello Angular!";
+  counter = 0;
 
-  data = {
-    message: "PLacki",
-    getMessage(greet) {
-      return greet + this.message;
-    }
-  };
+  constructor(private cdr:ChangeDetectorRef) {
 
-  alert(m){
-    /* window. */alert(m)
+    setInterval(() => {
+     
+        this.counter++;
+        cdr.detectChanges()
+     
+    }, 500);
   }
 }
