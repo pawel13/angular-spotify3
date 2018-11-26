@@ -2,10 +2,14 @@
 <div class="row">
   <div class="col">
     <app-items-list [items]="playlists"
+    [selected]="selected"
     (selectedChange)=" selected = $event ">
+  </app-items-list>
+  
+  <app-items-list [items]="playlists"
+     [(selected)]="selected">
     </app-items-list>
 
-    <!-- <input type="text" (change)="$event"> -->
 
   </div>
   <div class="col">

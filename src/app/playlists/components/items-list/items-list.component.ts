@@ -25,14 +25,13 @@ export class ItemsListComponent implements OnInit {
   @Input("items")
   playlists: Playlist[];
 
+  @Input()
   selected: Playlist;
 
   @Output()
   selectedChange = new EventEmitter<Playlist>();
 
   select(playlist: Playlist) {
-    this.selected = playlist;
-
     this.selectedChange.emit(playlist);
   }
 
