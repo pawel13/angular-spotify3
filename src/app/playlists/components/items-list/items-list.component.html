@@ -6,7 +6,8 @@
 
   (click)="select(playlist)"
 
-  appHighlight
+  [appHighlight]="playlist.color"
+
 
   *ngFor="let playlist of playlists; index as i; trackBy trackFn">
     {{i+1}}. {{playlist.name}}
