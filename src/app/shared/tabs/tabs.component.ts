@@ -20,7 +20,7 @@ export class TabsComponent implements OnInit, AfterViewInit {
   navRef: TabsNavComponent;
 
   @ContentChildren(TabComponent)
-  tabsList = new QueryList<TabComponent>();
+  tabsList: QueryList<TabComponent>;
 
   toggle(active: TabComponent) {
     this.tabsList.forEach(tab => {
@@ -30,18 +30,25 @@ export class TabsComponent implements OnInit, AfterViewInit {
 
   constructor() {}
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
+  subs = new Map();
+
   ngAfterContentInit() {
-    this.tabsList.changes.subscribe(change=>{
-      console.log(change)
-    })
+    this.tabsList.changes.subscribe(change => {
+      const items =  this.tabsList.toArray()
+      Array.from(this.subs.entries()).forEach(([tab,sub])=>{
+          if(!items.includes(tab)){
+            sub.unsubscribe()
+            this.subs.delete(tab)
+          }
+      })
+    });
+
     this.tabsList.forEach(tab => {
-      console.log(tab)
-      tab.openChange.subscribe(() => {
+      this.subs.set(tab, tab.openChange.subscribe(() => {
         this.toggle(tab);
-      });
+      }))
     });
   }
 
