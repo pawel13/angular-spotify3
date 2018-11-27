@@ -11,16 +11,17 @@
       <button (click)="hide = !hide">Toggle {{hide}}</button>
 
 
-      <ng-template appUnless>
+      <ng-template [appUnless]="hide" let-m="$implicit">
+
         <div>
-          <p>Ala ma kota</p>
+          <p>{{m}}</p>
         </div>
         
+        <app-playlists-view></app-playlists-view>
       </ng-template>
-
-
-
-      <!-- <app-playlists-view></app-playlists-view> -->
+      
+      
+      
       
     </div>
   </div>

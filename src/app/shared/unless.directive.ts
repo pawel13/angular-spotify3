@@ -1,23 +1,29 @@
-import { Directive, TemplateRef,ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { PlaylistsViewComponent } from '../playlists/components/playlists-view/playlists-view.component';
+import {
+  Directive,
+  TemplateRef,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Input
+} from "@angular/core";
 
 @Directive({
-  selector: '[appUnless]'
+  selector: "[appUnless]"
 })
 export class UnlessDirective {
 
-  constructor(
-    private tpl:TemplateRef<any>,
-    private vcr:ViewContainerRef,
-    private fr: ComponentFactoryResolver
-  ) {
-
-    const factory = fr.resolveComponentFactory(PlaylistsViewComponent)
-
-    const cr = vcr.createComponent(factory,0)
-
-    cr.instance.selected = cr.instance.playlists[2]
-    
+  @Input()
+  set appUnless(hide: boolean) {
+    if (!hide) {
+      this.vcr.createEmbeddedView(
+        this.tpl,
+        {
+          message: "placki ",
+          $implicit: "Ala ma kota"
+        },
+        this.vcr.length
+      );
+    }
   }
 
+  constructor(private tpl: TemplateRef<any>, private vcr: ViewContainerRef) {}
 }
