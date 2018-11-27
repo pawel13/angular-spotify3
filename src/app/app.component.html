@@ -6,15 +6,7 @@
         Welcome to {{ title }}!
       </h1>
 
-
-      <button (click)="hide = !hide">Toggle {{hide}}</button>
-
-      <div *appUnless="hide">
-        <p>Ala ma {{2+2}} KOTY</p>
-        <app-playlists-view></app-playlists-view>
-      </div>
-
-
+      <app-playlists-view></app-playlists-view>
 
 
     </div>
