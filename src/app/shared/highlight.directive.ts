@@ -19,45 +19,29 @@ import {
   //   "(mouseenter)":"activate($event)"
   // }
 })
-//implements OnInit, OnChanges, DoCheck, OnDestroy
 export class HighlightDirective {
+
   @Input("appHighlight")
-  // @HostBinding("style.color")
   color: string;
 
-  constructor(
-    private elem: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
-
-  @HostListener("mouseenter", ['$event.x','$event.y'])
-  activate(x:number,y:number) {
-    this.renderer.setStyle(this.elem.nativeElement, "color", this.color);
-    
+  @HostBinding("style.color")
+  get currentColor() {
+    return this.active ? this.color : "";
   }
-  
-  @HostListener("mouseenter")
+
+  active = false;
+
+  constructor() {}
+
+  @HostListener("mouseenter", ["$event.x", "$event.y"])
+  activate(x: number, y: number) {
+    this.active = true;
+  }
+
+  @HostListener("mouseleave")
   deactivate() {
-    this.renderer.setStyle(this.elem.nativeElement, "color", '');
-
+    this.active = false;
   }
-
-  /* 
-  ngOnInit() {
-    console.log("ngOnInit!");
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges", changes);
-    // this.elem.nativeElement.style.color = this.color;
-    this.renderer.setStyle(this.elem.nativeElement, "color", this.color);
-  }
-
-  ngDoCheck(): void {
-    console.log("ngDoCheck");
-  }
-
-  ngOnDestroy(): void {
-    console.log("ngOnDestroy");
-  } */
 }
+
+console.log(HighlightDirective)
