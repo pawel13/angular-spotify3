@@ -9,7 +9,8 @@
 
   </div>
   <div class="col">
-    <app-playlist-details 
+    <app-playlist-details
+      (playlistChange)="save($event)" 
       [playlist]="selected">
     </app-playlist-details>
 

@@ -29,8 +29,9 @@ export class PlaylistDetailsComponent implements OnInit {
   playlistChange = new EventEmitter<Playlist>();
 
   save(formRef: NgForm) {
+
     // const draft:Partial<Playlist> = formRef.value
-    
+
     const draft:Pick<Playlist, 'name' | 'favourite' | 'color'> = formRef.value
 
     const playlist = {
