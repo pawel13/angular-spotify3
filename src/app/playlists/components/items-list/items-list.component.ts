@@ -22,6 +22,9 @@ NgForOfContext;
   // ]
 })
 export class ItemsListComponent implements OnInit {
+
+  hover: Playlist
+
   @Input("items")
   playlists: Playlist[];
 
