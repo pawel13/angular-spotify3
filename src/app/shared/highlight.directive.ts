@@ -44,4 +44,4 @@ export class HighlightDirective {
   }
 }
 
-console.log(HighlightDirective)
+// console.log(HighlightDirective)

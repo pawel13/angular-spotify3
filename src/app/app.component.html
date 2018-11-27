@@ -1,8 +1,3 @@
-<!-- 
-  ZenCoding / Emmet:
-
-  .container>.row>.col
- -->
 
 <div class="container">
   <div class="row">
@@ -12,7 +7,20 @@
         Welcome to {{ title }}!
       </h1>
       
-      <app-playlists-view></app-playlists-view>
+
+      <button (click)="hide = !hide">Toggle {{hide}}</button>
+
+
+      <ng-template appUnless>
+        <div>
+          <p>Ala ma kota</p>
+        </div>
+        
+      </ng-template>
+
+
+
+      <!-- <app-playlists-view></app-playlists-view> -->
       
     </div>
   </div>
