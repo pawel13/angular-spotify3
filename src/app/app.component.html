@@ -1,28 +1,22 @@
-
 <div class="container">
   <div class="row">
     <div class="col">
-      
+
       <h1>
         Welcome to {{ title }}!
       </h1>
-      
+
 
       <button (click)="hide = !hide">Toggle {{hide}}</button>
 
-
-      <ng-template [appUnless]="hide" let-m="$implicit">
-
-        <div>
-          <p>{{m}}</p>
-        </div>
-        
+      <div *appUnless="hide">
+        <p>Ala ma {{2+2}} KOTY</p>
         <app-playlists-view></app-playlists-view>
-      </ng-template>
-      
-      
-      
-      
+      </div>
+
+
+
+
     </div>
   </div>
 </div>

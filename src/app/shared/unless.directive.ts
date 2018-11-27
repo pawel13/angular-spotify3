@@ -3,25 +3,29 @@ import {
   TemplateRef,
   ViewContainerRef,
   ComponentFactoryResolver,
-  Input
+  Input,
+  ViewRef
 } from "@angular/core";
 
 @Directive({
   selector: "[appUnless]"
 })
 export class UnlessDirective {
+  viewCache: ViewRef | null;
 
   @Input()
   set appUnless(hide: boolean) {
+
     if (!hide) {
-      this.vcr.createEmbeddedView(
-        this.tpl,
-        {
-          message: "placki ",
-          $implicit: "Ala ma kota"
-        },
-        this.vcr.length
-      );
+
+      if (this.viewCache) {
+        this.vcr.insert(this.viewCache);
+      } else {
+        this.vcr.createEmbeddedView(this.tpl);
+      }
+      
+    } else {
+      this.viewCache = this.vcr.detach(0);
     }
   }
 
