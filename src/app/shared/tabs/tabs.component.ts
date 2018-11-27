@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { TabComponent } from "../tab/tab.component";
-import { TabsNavComponent } from '../tabs-nav/tabs-nav.component';
+import { TabsNavComponent } from "../tabs-nav/tabs-nav.component";
 
 @Component({
   selector: "app-tabs",
@@ -9,8 +9,8 @@ import { TabsNavComponent } from '../tabs-nav/tabs-nav.component';
 })
 export class TabsComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('navRef')
-  navRef:TabsNavComponent
+  @ViewChild(TabsNavComponent, { read: TabsNavComponent })
+  navRef: TabsNavComponent;
 
   tabsList: TabComponent[] = [];
 
@@ -20,15 +20,13 @@ export class TabsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  constructor() {
-  }
-  
+  constructor() {}
+
   ngOnInit() {
-    console.log(this.navRef.tabs)
-
+    console.log(this.navRef.tabs = this.tabsList);
   }
 
-  ngAfterViewInit(){
-    console.log(this.navRef.tabs)
+  ngAfterViewInit() {
+    console.log(this.navRef.tabs);
   }
 }
