@@ -8,11 +8,12 @@ import {
   OnDestroy,
   SimpleChanges,
   Renderer2,
-  HostBinding
+  HostBinding,
+  HostListener
 } from "@angular/core";
 
 @Directive({
-  selector: "[appHighlight]",
+  selector: "[appHighlight]"
   // host: {
   //   "[style.color]": "color",
   //   "(mouseenter)":"activate($event)"
@@ -20,9 +21,8 @@ import {
 })
 //implements OnInit, OnChanges, DoCheck, OnDestroy
 export class HighlightDirective {
-
   @Input("appHighlight")
-  @HostBinding('style.color')
+  // @HostBinding("style.color")
   color: string;
 
   constructor(
@@ -30,11 +30,18 @@ export class HighlightDirective {
     private renderer: Renderer2
   ) {}
 
-
-
-
-
+  @HostListener("mouseenter", ['$event.x','$event.y'])
+  activate(x:number,y:number) {
+    this.renderer.setStyle(this.elem.nativeElement, "color", this.color);
+    
+  }
   
+  @HostListener("mouseenter")
+  deactivate() {
+    this.renderer.setStyle(this.elem.nativeElement, "color", '');
+
+  }
+
   /* 
   ngOnInit() {
     console.log("ngOnInit!");
