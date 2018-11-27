@@ -1,27 +1,29 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from "@angular/core";
+import { TabsComponent } from "../tabs/tabs.component";
 
 @Component({
-  selector: 'app-tab',
-  templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.scss']
+  selector: "app-tab",
+  templateUrl: "./tab.component.html",
+  styleUrls: ["./tab.component.scss"]
 })
 export class TabComponent implements OnInit {
-
   @Input()
-  title:string
+  title: string;
 
-  @HostBinding('class.card')
-  cokolwiek = true
+  @HostBinding("class.card")
+  cokolwiek = true;
 
-  open = false
+  open = false;
 
-  toggle(){
-    this.open = !this.open
+  toggle() {
+    // this.open = !this.open;
+    this.tabs.toggle(this)
   }
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private tabs: TabsComponent) {
+    tabs.tabsList.push(this);
+    console.log(tabs)
   }
 
+  ngOnInit() {}
 }
