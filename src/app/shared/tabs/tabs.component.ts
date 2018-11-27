@@ -11,7 +11,7 @@ export class TabsComponent implements OnInit {
 
   toggle(active: TabComponent) {
     this.tabsList.forEach(tab => {
-      tab.open = active == tab;
+      tab.open = active === tab;
     });
   }
 
