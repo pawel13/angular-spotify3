@@ -7,24 +7,35 @@ import {
   DoCheck,
   OnDestroy,
   SimpleChanges,
-  Renderer2
+  Renderer2,
+  HostBinding
 } from "@angular/core";
 
 @Directive({
-  selector: "[appHighlight]"
+  selector: "[appHighlight]",
+  // host: {
+  //   "[style.color]": "color",
+  //   "(mouseenter)":"activate($event)"
+  // }
 })
-export class HighlightDirective
-  implements OnInit, OnChanges, DoCheck, OnDestroy {
+//implements OnInit, OnChanges, DoCheck, OnDestroy
+export class HighlightDirective {
+
   @Input("appHighlight")
+  @HostBinding('style.color')
   color: string;
 
   constructor(
     private elem: ElementRef<HTMLElement>,
     private renderer: Renderer2
-  ) {
-    console.log("constructor!");
-  }
+  ) {}
 
+
+
+
+
+  
+  /* 
   ngOnInit() {
     console.log("ngOnInit!");
   }
@@ -41,5 +52,5 @@ export class HighlightDirective
 
   ngOnDestroy(): void {
     console.log("ngOnDestroy");
-  }
+  } */
 }
