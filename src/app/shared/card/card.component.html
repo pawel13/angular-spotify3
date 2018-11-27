@@ -1,9 +1,22 @@
-<!-- .card>.card-body>h5.card-title -->
+<!-- View -->
 
 <div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Tytuł</h5>
-    Placki
-  </div>
-</div>
 
+  <div class="card-header">
+    <ng-content select="header"></ng-content>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">
+      <ng-content select=".title"></ng-content>
+    </h5>
+
+    <ng-content></ng-content>
+
+  </div>
+
+  <div class="card-footer">
+    <ng-content select="footer"></ng-content>
+  </div>
+
+</div>
