@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from "@angular/core";
-import { TabsComponent } from "../tabs/tabs.component";
+import { Component, OnInit, Input, HostBinding, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-tab",
@@ -7,7 +6,6 @@ import { TabsComponent } from "../tabs/tabs.component";
   styleUrls: ["./tab.component.scss"]
 })
 export class TabComponent implements OnInit {
-  
   @Input()
   title: string;
 
@@ -16,14 +14,13 @@ export class TabComponent implements OnInit {
 
   open = false;
 
+  openChange = new EventEmitter()
+
   toggle() {
-    this.tabs.toggle(this)
+    this.openChange.emit()
   }
 
-  constructor(private tabs: TabsComponent) {
-    tabs.tabsList.push(this);
-    // console.log(tabs)
-  }
+  constructor() {}
 
   ngOnInit() {}
 }

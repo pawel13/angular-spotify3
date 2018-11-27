@@ -8,19 +8,22 @@
 
 
       <app-tabs>
-
+        <app-tabs-nav></app-tabs-nav>
+        
+        
         <app-tab title="Placki A">
           Placki A
         </app-tab>
-
+        
         <app-tab title="Placki B">
           Placki B
         </app-tab>
-
-        <app-tab title="Placki C">
+        
+        <button (click)="hide = !hide">Toggle</button>
+        <app-tab title="Placki C" *ngIf="!hide">
           Placki C
         </app-tab>
-
+        
       </app-tabs>
 
 

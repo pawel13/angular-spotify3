@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ContentChild,
+  ContentChildren,
+  QueryList
+} from "@angular/core";
 import { TabComponent } from "../tab/tab.component";
 import { TabsNavComponent } from "../tabs-nav/tabs-nav.component";
 
@@ -8,11 +16,11 @@ import { TabsNavComponent } from "../tabs-nav/tabs-nav.component";
   styleUrls: ["./tabs.component.scss"]
 })
 export class TabsComponent implements OnInit, AfterViewInit {
-
-  @ViewChild(TabsNavComponent, { read: TabsNavComponent })
+  @ContentChild(TabsNavComponent, { read: TabsNavComponent })
   navRef: TabsNavComponent;
 
-  tabsList: TabComponent[] = [];
+  @ContentChildren(TabComponent)
+  tabsList = new QueryList<TabComponent>();
 
   toggle(active: TabComponent) {
     this.tabsList.forEach(tab => {
@@ -23,13 +31,24 @@ export class TabsComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit() {
-    // console.log(this.navRef.tabs = this.tabsList);
   }
   
+  ngAfterContentInit() {
+    this.tabsList.changes.subscribe(change=>{
+      console.log(change)
+    })
+    this.tabsList.forEach(tab => {
+      console.log(tab)
+      tab.openChange.subscribe(() => {
+        this.toggle(tab);
+      });
+    });
+  }
+
   ngAfterViewInit() {
-    // setTimeout(()=>{
-      this.navRef.tabs = this.tabsList
-    // })
-    // console.log(this.navRef.tabs);
+    setTimeout(() => {
+      this.navRef.tabs = this.tabsList;
+    });
+    console.log(this.tabsList);
   }
 }
