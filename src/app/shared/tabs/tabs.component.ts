@@ -23,10 +23,13 @@ export class TabsComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.navRef.tabs = this.tabsList);
+    // console.log(this.navRef.tabs = this.tabsList);
   }
-
+  
   ngAfterViewInit() {
-    console.log(this.navRef.tabs);
+    // setTimeout(()=>{
+      this.navRef.tabs = this.tabsList
+    // })
+    // console.log(this.navRef.tabs);
   }
 }
