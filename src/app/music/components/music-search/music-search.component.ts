@@ -17,12 +17,12 @@ export class MusicSearchComponent implements OnInit {
     this.service.getAlbums().subscribe(
       //onNext:
       albums => (this.albums = albums),
+      
       //onError:
-      error => (this.message = error.error.error.message),
+      error => (this.message = error.message),
+
       //onComplete:
-      () => {
-        console.log("complete");
-      }
+      () => console.log("complete")
     );
   }
 }

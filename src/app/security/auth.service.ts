@@ -27,7 +27,7 @@ export class AuthService {
       }
     });
 
-    console.log(`${url}?${params.toString()}`);
+    location.href = (`${url}?${params.toString()}`);
   }
 
   getToken() {
