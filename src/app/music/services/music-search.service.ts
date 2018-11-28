@@ -1,14 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Album } from "../../model/Album";
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: "root"
 })
 export class MusicSearchService {
-
-  api_url = environment.api_url
-
   albums: Album[] = [
     {
       id: "123",
@@ -21,7 +17,9 @@ export class MusicSearchService {
     }
   ];
 
-  constructor() {}
+  constructor(
+    @Inject("SEARCH_API_URL") private search_url: string
+  ) {}
 
   getAlbums() {}
 }
