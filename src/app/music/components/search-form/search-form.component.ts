@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-search-form",
@@ -6,7 +7,17 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./search-form.component.scss"]
 })
 export class SearchFormComponent implements OnInit {
-  constructor() {}
+  
+  queryForm: FormGroup;
+
+  constructor() {
+
+    this.queryForm = new FormGroup({
+      query: new FormControl("batman")
+    });
+
+    console.log(this.queryForm)
+  }
 
   ngOnInit() {}
 

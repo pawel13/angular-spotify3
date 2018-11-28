@@ -3,12 +3,18 @@
 
 <div class="input-group mb-3">
 
-  <input type="text" class="form-control" placeholder="Search" #queryRef (keyup.enter)="search(queryRef.value)">
+  <input class="form-control" placeholder="Search" [formControl]="queryForm.get('query')">
 
-  <div class="input-group-append">
+
+</div>
+
+
+
+
+
+
+<!-- <div class="input-group-append">
     <button class="btn btn-outline-secondary" (click)="search(queryRef.value)">
       Search
     </button>
-  </div>
-
-</div>
+  </div> -->
