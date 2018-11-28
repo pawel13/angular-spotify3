@@ -1,9 +1,9 @@
 <!-- https://getbootstrap.com/docs/4.1/components/input-group/#button-addons -->
 
 
-<div class="input-group mb-3">
+<div class="input-group mb-3" [formGroup]="queryForm">
 
-  <input class="form-control" placeholder="Search" [formControl]="queryForm.get('query')">
+  <input class="form-control" placeholder="Search" formControlName="query">
 
 
 </div>
