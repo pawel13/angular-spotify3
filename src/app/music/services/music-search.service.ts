@@ -1,7 +1,6 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
-import { Album, AlbumsResponse } from "../../model/Album";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { AuthService } from "../../security/auth.service";
+import { AlbumsResponse } from "../../model/Album";
+import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 export const SEARCH_URL = new InjectionToken("Search API Url");
@@ -10,17 +9,7 @@ export const SEARCH_URL = new InjectionToken("Search API Url");
   providedIn: "root"
 })
 export class MusicSearchService {
-  albums: Album[] = [
-    {
-      id: "123",
-      name: "Album z serwisu!",
-      images: [
-        {
-          url: "http://placekitten.com/300/300"
-        }
-      ]
-    }
-  ];
+  // albums: Album[] = [];
 
   constructor(
     @Inject(SEARCH_URL) private search_url: string,
@@ -35,9 +24,6 @@ export class MusicSearchService {
           q: "batman"
         }
       })
-      .pipe(
-        map(resp => resp.albums.items),
-      );
+      .pipe(map(resp => resp.albums.items));
   }
 }
-
