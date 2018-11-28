@@ -16,12 +16,12 @@ export class MusicSearchService {
     private http: HttpClient
   ) {}
 
-  getAlbums() {
+  getAlbums(query = "batman") {
     return this.http
       .get<AlbumsResponse>(this.search_url, {
         params: {
           type: "album",
-          q: "batman"
+          q: query
         }
       })
       .pipe(map(resp => resp.albums.items));
