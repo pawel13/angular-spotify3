@@ -27,15 +27,20 @@ export class AuthService {
       }
     });
 
-    location.href = (`${url}?${params.toString()}`);
+    sessionStorage.removeItem("token");
+    location.href = `${url}?${params.toString()}`;
   }
 
   getToken() {
+    this.token = JSON.parse(sessionStorage.getItem("token")!);
+
     if (!this.token && location.hash) {
       const params = new HttpParams({
         fromString: location.hash
       });
       this.token = params.get("#access_token") || "";
+      sessionStorage.setItem("token", JSON.stringify(this.token));
+      location.hash = ''
     }
 
     if (!this.token) {
