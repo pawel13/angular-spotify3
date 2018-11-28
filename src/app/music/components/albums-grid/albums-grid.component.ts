@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Album } from '../../../model/Album';
 
 @Component({
   selector: 'app-albums-grid',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./albums-grid.component.scss']
 })
 export class AlbumsGridComponent implements OnInit {
+
+  @Input()
+  albums:Album[]
 
   constructor() { }
 
