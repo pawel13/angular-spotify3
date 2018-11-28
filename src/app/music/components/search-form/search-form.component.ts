@@ -6,6 +6,7 @@ import {
   AbstractControl,
   FormBuilder
 } from "@angular/forms";
+import { distinctUntilChanged, filter, debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "app-search-form",
@@ -15,38 +16,25 @@ import {
 export class SearchFormComponent implements OnInit {
   queryForm: FormGroup;
 
-  constructor(private bob: FormBuilder) {
-    this.queryForm = this.bob.group({
-      query: ["batman"],
-      
-      options: this.bob.group({
-        type: ["album"],
-        markets: this.bob.array([
-          this.bob.group({
-            name: ["PL"]
-          }),
-          this.bob.group({
-            name: ["GB"]
-          })
-        ])
-      })
+  constructor() {
+    this.queryForm = new FormGroup({
+      query: new FormControl("batman")
     });
 
     console.log(this.queryForm);
-  }
 
-  addMarket() {
-    const markets = this.queryForm.get(["options", "markets"]) as FormArray;
+    this.queryForm
+      .get("query")!
+      .valueChanges.pipe(
 
-    markets.push(
-      this.bob.group({
-        name: new FormControl("")
-      })
-    );
-  }
-
-  getMarkets() {
-    return (this.queryForm.get("options.markets") as FormArray).controls;
+        debounceTime(400),
+        distinctUntilChanged(),
+        filter(query => query.length >= 3)
+      
+      )
+      .subscribe(query => {
+        this.search(query);
+      });
   }
 
   ngOnInit() {}
