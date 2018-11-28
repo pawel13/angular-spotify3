@@ -6,12 +6,13 @@ import { CardComponent } from './card/card.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tab/tab.component';
 import { TabsNavComponent } from './tabs-nav/tabs-nav.component';
+import { TabDirective } from './tab.directive';
 
 @NgModule({
-  declarations: [HighlightDirective, UnlessDirective, CardComponent, TabsComponent, TabComponent, TabsNavComponent],
+  declarations: [HighlightDirective, UnlessDirective, CardComponent, TabsComponent, TabComponent, TabsNavComponent, TabDirective],
   imports: [
     CommonModule
   ],
-  exports: [HighlightDirective, UnlessDirective, CardComponent, TabsComponent, TabComponent, TabsNavComponent]
+  exports: [HighlightDirective, UnlessDirective, CardComponent, TabsComponent, TabComponent, TabsNavComponent, TabDirective]
 })
 export class SharedModule { }

@@ -5,10 +5,12 @@ import {
   AfterViewInit,
   ContentChild,
   ContentChildren,
-  QueryList
+  QueryList,
+  ViewContainerRef
 } from "@angular/core";
 import { TabComponent } from "../tab/tab.component";
 import { TabsNavComponent } from "../tabs-nav/tabs-nav.component";
+import { TabDirective } from "../tab.directive";
 
 @Component({
   selector: "app-tabs",
@@ -19,13 +21,15 @@ export class TabsComponent implements OnInit, AfterViewInit {
   @ContentChild(TabsNavComponent, { read: TabsNavComponent })
   navRef: TabsNavComponent;
 
-  @ContentChildren(TabComponent)
-  tabsList: QueryList<TabComponent>;
+  @ViewChild("outlet", { read: ViewContainerRef })
+  outlet: ViewContainerRef;
 
-  toggle(active: TabComponent) {
-    this.tabsList.forEach(tab => {
-      tab.open = active === tab;
-    });
+  @ContentChildren(TabDirective)
+  tabsList: QueryList<TabDirective>;
+
+  toggle(active: TabDirective) {
+    this.outlet.clear()
+    this.outlet.createEmbeddedView(active.tpl);
   }
 
   constructor() {}
@@ -35,20 +39,8 @@ export class TabsComponent implements OnInit, AfterViewInit {
   subs = new Map();
 
   ngAfterContentInit() {
-    this.tabsList.changes.subscribe(change => {
-      const items =  this.tabsList.toArray()
-      Array.from(this.subs.entries()).forEach(([tab,sub])=>{
-          if(!items.includes(tab)){
-            sub.unsubscribe()
-            this.subs.delete(tab)
-          }
-      })
-    });
-
-    this.tabsList.forEach(tab => {
-      this.subs.set(tab, tab.openChange.subscribe(() => {
-        this.toggle(tab);
-      }))
+    this.navRef.activeChange.subscribe((tab:TabDirective) => {
+      this.toggle(tab);
     });
   }
 
