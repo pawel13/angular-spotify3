@@ -6,64 +6,9 @@
         Welcome to {{ title }}!
       </h1>
 
-
-      <app-tabs>
-        <app-tabs-nav></app-tabs-nav>
-
-        <div *appTab="'Placki A'">
-          Placki A
-        </div>
-
-        <div *appTab="'Placki B'">
-          Placki B
-        </div>
-
-        <div *appTab="'Placki C'">
-          Placki C
-        </div>
-
-      </app-tabs>
-
-
-
-
-
-
-      <!-- <app-playlists-view></app-playlists-view> -->
+      <app-music-search></app-music-search>
 
 
     </div>
   </div>
 </div>
-
-<!-- 
-<table>
-  <tr *ngFor="let item of list">
-    <td *ngFor="let item of list">
-      <div [ngSwitch]="conditionExpression">
-        <div *ngSwitchCase="expression">output</div>
-        <div *ngSwitchDefault>output2</div>
-      </div>
-    </td>
-  </tr>
-</table> -->
-
-<!--
-  ANgular material table:
-  <table cdkTable>
-
-  <ng-container cdkCol="id">
-    <td *cdkHeaderDef>Id.</td>
-    <td *cdkCellDef="let row">{{row.id}}</td>
-  </ng-container>
-
-  <ng-container cdkCol="price">
-    <td *cdkHeaderDef>Price.</td>
-    <td *cdkCellDef="let row">{{row.price | currency}}</td>
-  </ng-container>
-
-  <tr *cdkHeaderRowRef="let row; columns:['id','title']"></tr>
-  <tr *cdkRowRef="let row; columns:['id','title']"></tr>
-
-
-</table> -->
