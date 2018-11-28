@@ -10,10 +10,9 @@ import { MusicSearchService } from "../../services/music-search.service";
 export class MusicSearchComponent implements OnInit {
   albums: Album[];
 
-  constructor(
-    /*  @Inject(MusicSearchService) */
-    private service: MusicSearchService
-  ) {}
+  constructor(private service: MusicSearchService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.albums = this.service.getAlbums();
+  }
 }
