@@ -7,7 +7,11 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
 import { AlbumsGridComponent } from "./components/albums-grid/albums-grid.component";
 import { AlbumCardComponent } from "./components/album-card/album-card.component";
 import { environment } from "../../environments/environment";
-import { SEARCH_URL } from './services/music-search.service';
+import { MusicSearchService } from './services/music-search.service';
+import {
+  SEARCH_URL,
+  MusicSearchService
+} from "./services/music-search.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +26,20 @@ import { SEARCH_URL } from './services/music-search.service';
     {
       provide: SEARCH_URL,
       useValue: environment.api_url
-    }
+    },
+    // {
+    //   provide: MusicSearchService,
+    //   useFactory: (url: string) => {
+    //     return new MusicSearchService(url);
+    //   },
+    //   deps: [SEARCH_URL]
+    // },
+    // {
+    //   provide: AbstractSearchService,
+    //   useClass: MusicSearchService,
+    //   // deps: [SEARCH_URL]
+    // },
+    // MusicSearchService
   ]
 })
 export class MusicModule {}
