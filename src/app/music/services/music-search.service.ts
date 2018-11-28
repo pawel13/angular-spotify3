@@ -1,6 +1,8 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
-import { Album } from "../../model/Album";
+import { Album, AlbumsResponse } from "../../model/Album";
 import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../../security/auth.service";
+import { Observable } from "rxjs";
 
 export const SEARCH_URL = new InjectionToken("Search API Url");
 
@@ -22,30 +24,22 @@ export class MusicSearchService {
 
   constructor(
     @Inject(SEARCH_URL) private search_url: string,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) {}
 
   getAlbums() {
-
-
-    const request = this.http.get(this.search_url,{
-      headers:{
-
-      },
-      params:{
-
-      },
-      // observe:'response',
-      // reportProgress:false,
-      // responseType:'arraybuffer',
-    })
-
-    request.subscribe(resp => console.log(resp))
-    request.subscribe(resp => console.log(resp))
-    request.subscribe(resp => console.log(resp))
-
-    console.log('jestem tutaj!!')
-
-    return this.albums;
+    return this.http
+      .get<AlbumsResponse>(this.search_url, {
+        headers: {
+          Authorization: "Bearer " + this.auth.getToken()
+        },
+        params: {
+          type: "album",
+          q: "batman"
+        }
+      })
+      .pipe(map(resp => resp.albums.items));
   }
 }
+import { map } from "rxjs/operators";

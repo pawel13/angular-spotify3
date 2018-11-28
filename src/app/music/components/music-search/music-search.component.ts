@@ -9,10 +9,20 @@ import { MusicSearchService } from "../../services/music-search.service";
 })
 export class MusicSearchComponent implements OnInit {
   albums: Album[];
+  message: string;
 
   constructor(private service: MusicSearchService) {}
 
   ngOnInit() {
-    this.albums = this.service.getAlbums();
+    this.service.getAlbums().subscribe(
+      //onNext:
+      albums => (this.albums = albums),
+      //onError:
+      error => (this.message = error.error.error.message),
+      //onComplete:
+      () => {
+        console.log("complete");
+      }
+    );
   }
 }
