@@ -1,5 +1,7 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject, InjectionToken } from "@angular/core";
 import { Album } from "../../model/Album";
+
+export const SEARCH_URL = new InjectionToken('Search API Url')
 
 @Injectable({
   providedIn: "root"
@@ -18,7 +20,7 @@ export class MusicSearchService {
   ];
 
   constructor(
-    @Inject("SEARCH_API_URL") private search_url: string
+    @Inject(SEARCH_URL) private search_url: string
   ) {}
 
   getAlbums() {}

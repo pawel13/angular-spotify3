@@ -7,6 +7,7 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
 import { AlbumsGridComponent } from "./components/albums-grid/albums-grid.component";
 import { AlbumCardComponent } from "./components/album-card/album-card.component";
 import { environment } from "../../environments/environment";
+import { SEARCH_URL } from './services/music-search.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { environment } from "../../environments/environment";
   exports: [MusicSearchComponent],
   providers: [
     {
-      provide: "SEARCH_API_URL",
+      provide: SEARCH_URL,
       useValue: environment.api_url
     }
   ]
