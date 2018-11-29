@@ -22,15 +22,18 @@ export class MusicSearchService {
     @Inject(SEARCH_URL) private search_url: string,
     private http: HttpClient
   ) {
+    //
     this.queryChange
       .pipe(
         map(query => ({
           type: "album",
           q: query
         })),
+
         switchMap(params =>
           this.http.get<AlbumsResponse>(this.search_url, { params })
         ),
+        
         // switchAll(),
         map(resp => resp.albums.items)
       )
@@ -47,5 +50,9 @@ export class MusicSearchService {
 
   getQuery() {
     return this.queryChange.asObservable();
+  }
+
+  ngOnDestroy(){
+    console.log('bye bye from service')
   }
 }

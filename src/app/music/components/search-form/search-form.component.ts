@@ -28,6 +28,8 @@ import { Observable, Observer } from "rxjs";
   styleUrls: ["./search-form.component.scss"]
 })
 export class SearchFormComponent implements OnInit {
+ 
+ 
   @Input()
   set query(value: string) {
     this.queryForm.get("query")!.setValue(value, {
