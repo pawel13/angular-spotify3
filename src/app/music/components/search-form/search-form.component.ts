@@ -8,9 +8,18 @@ import {
   Validators,
   ValidatorFn,
   Validator,
-  ValidationErrors
+  ValidationErrors,
+  AsyncValidatorFn,
+  AsyncValidator
 } from "@angular/forms";
-import { distinctUntilChanged, filter, debounceTime } from "rxjs/operators";
+import {
+  distinctUntilChanged,
+  filter,
+  debounceTime,
+  combineLatest,
+  withLatestFrom
+} from "rxjs/operators";
+import { Observable, Observer } from "rxjs";
 
 @Component({
   selector: "app-search-form",
@@ -21,7 +30,6 @@ export class SearchFormComponent implements OnInit {
   queryForm: FormGroup;
 
   constructor() {
-
     const censor = (badword: string): ValidatorFn =>
       //
       (control: AbstractControl): ValidationErrors | null => {
@@ -35,27 +43,66 @@ export class SearchFormComponent implements OnInit {
           : null;
       };
 
+    const asyncCensor = (badword: string): AsyncValidatorFn => (
+      control: AbstractControl
+    ): Observable<ValidationErrors | null> => {
+      //
+      // return this.http.post(/validate,value).pipe(map(resp => errors))
+
+      return Observable.create(
+        (observer: Observer<ValidationErrors | null>) => {
+          //
+          const handler = setTimeout(() => {
+            const hasError = (control.value as string).includes(badword);
+
+            observer.next(
+              hasError
+                ? {
+                    censor: { badword }
+                  }
+                : null
+            );
+            observer.complete();
+          }, 2000);
+
+          // onUnsubscribe
+          return () => {
+            clearTimeout(handler);
+          };
+        }
+      );
+    };
+
     this.queryForm = new FormGroup({
-      query: new FormControl("", [
-        Validators.required,
-        Validators.minLength(3),
-        censor("batman")
-      ])
+      query: new FormControl(
+        "",
+        [Validators.required, Validators.minLength(3) /* , censor("batman") */],
+        [asyncCensor("batman")]
+      )
     });
 
-    (window as any)["form"] = this.queryForm;
     console.log(this.queryForm);
+    ///
 
-    this.queryForm
+    const value$ = this.queryForm.get("query")!.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      filter((query:string) => query.length >= 3)
+    );
+
+    const valid$ = this.queryForm
       .get("query")!
-      .valueChanges.pipe(
-        debounceTime(400),
-        distinctUntilChanged(),
-        filter(query => query.length >= 3)
-      )
-      .subscribe(query => {
-        this.search(query);
-      });
+      .statusChanges.pipe(filter(status => status === "VALID"));
+
+    const search$ = valid$.pipe(
+      // combineLatest(value$),
+      withLatestFrom(value$, (valid, value) => value)
+    );
+
+    search$.subscribe(query => {
+      // console.log(query);
+      this.search(query);
+    });
   }
 
   ngOnInit() {}
