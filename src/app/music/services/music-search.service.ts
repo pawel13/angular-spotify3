@@ -15,17 +15,19 @@ export const SEARCH_URL = new InjectionToken("Search API Url");
   providedIn: "root"
 })
 export class MusicSearchService {
-
   albumsChange = new BehaviorSubject<Album[]>([]);
+  queryChange = new BehaviorSubject<string>('batman');
 
   constructor(
     @Inject(SEARCH_URL) private search_url: string,
     private http: HttpClient
   ) {
-    console.log(this.albumsChange)
+    console.log(this.albumsChange);
   }
 
   search(query: string): any {
+    this.queryChange.next(query)
+
     this.http
       .get<AlbumsResponse>(this.search_url, {
         params: {
@@ -39,8 +41,11 @@ export class MusicSearchService {
       });
   }
 
-
   getAlbums() {
     return this.albumsChange.asObservable();
+  }
+
+  getQuery() {
+    return this.queryChange.asObservable();
   }
 }

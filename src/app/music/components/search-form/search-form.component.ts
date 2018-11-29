@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -28,6 +28,14 @@ import { Observable, Observer } from "rxjs";
   styleUrls: ["./search-form.component.scss"]
 })
 export class SearchFormComponent implements OnInit {
+  @Input()
+  set query(value: string) {
+    this.queryForm.get("query")!.setValue(value, {
+      emitEvent: false,
+      onlySelf: true
+    });
+  }
+
   queryForm: FormGroup;
 
   constructor() {
@@ -88,7 +96,7 @@ export class SearchFormComponent implements OnInit {
     const value$ = this.queryForm.get("query")!.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged(),
-      filter((query:string) => query.length >= 3)
+      filter((query: string) => query.length >= 3)
     );
 
     const valid$ = this.queryForm

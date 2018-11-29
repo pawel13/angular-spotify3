@@ -18,6 +18,7 @@ export class MusicSearchComponent implements OnInit {
     }),
     catchError(error => (this.message = error.message))
   );
+  query$ = this.service.getQuery()
 
   message: string;
 
