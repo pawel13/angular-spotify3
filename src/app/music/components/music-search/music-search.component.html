@@ -11,6 +11,16 @@
   <div class="col">
     <p class="alert alert-danger" *ngIf="message">{{message}}</p>
     
-    <app-albums-grid [albums]="albums$ | async"></app-albums-grid>
+
+    <ng-container *ngIf="(albums$ | async) as albums">
+
+      <p>Found {{albums.length}} results</p>
+  
+      <app-albums-grid [albums]="albums"></app-albums-grid>
+
+    </ng-container>
+
+
+
   </div>
 </div>
