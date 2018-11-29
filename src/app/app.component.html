@@ -2,24 +2,9 @@
   <div class="row">
     <div class="col">
 
-      <app-music-search></app-music-search>
 
+      <router-outlet></router-outlet>
 
     </div>
-    <ng-container appMusicProvider>
-
-      <div class="col">
-
-        <app-music-search></app-music-search>
-
-      </div>
-      <div class="col">
-
-        <button (click)="hide =!hide">Toggle</button>
-
-        <app-music-search *ngIf="!hide"></app-music-search>
-
-      </div>
-    </ng-container>
   </div>
 </div>
