@@ -10,7 +10,8 @@ import {
   Validator,
   ValidationErrors,
   AsyncValidatorFn,
-  AsyncValidator
+  AsyncValidator,
+  NgControlStatus
 } from "@angular/forms";
 import {
   distinctUntilChanged,
@@ -95,12 +96,10 @@ export class SearchFormComponent implements OnInit {
       .statusChanges.pipe(filter(status => status === "VALID"));
 
     const search$ = valid$.pipe(
-      // combineLatest(value$),
       withLatestFrom(value$, (valid, value) => value)
     );
 
     search$.subscribe(query => {
-      // console.log(query);
       this.search(query);
     });
   }
