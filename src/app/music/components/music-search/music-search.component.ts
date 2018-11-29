@@ -18,18 +18,20 @@ export class MusicSearchComponent implements OnInit {
     this.service.search(query);
   }
 
-  sub: Subscription;
+  sub = new Subscription();
 
   ngOnInit() {
-    this.sub = this.service
-      .getAlbums()
-      .subscribe(
-        albums => (this.albums = albums),
-        error => (this.message = error.message)
-      );
+    this.sub.add(
+      this.service
+        .getAlbums()
+        .subscribe(
+          albums => (this.albums = albums),
+          error => (this.message = error.message)
+        )
+    );
   }
 
-  ngOnDestroy(){
-    this.sub.unsubscribe()
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
