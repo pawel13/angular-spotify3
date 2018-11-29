@@ -4,7 +4,8 @@ import {
   FormControl,
   FormArray,
   AbstractControl,
-  FormBuilder
+  FormBuilder,
+  Validators
 } from "@angular/forms";
 import { distinctUntilChanged, filter, debounceTime } from "rxjs/operators";
 
@@ -18,7 +19,10 @@ export class SearchFormComponent implements OnInit {
 
   constructor() {
     this.queryForm = new FormGroup({
-      query: new FormControl("batman")
+      query: new FormControl("",[
+        Validators.required,
+        Validators.minLength(3)
+      ])
     });
 
     console.log(this.queryForm);

@@ -32,6 +32,7 @@ export class AuthService {
   }
 
   getToken() {
+    
     this.token = JSON.parse(sessionStorage.getItem("token")!);
 
     if (!this.token && location.hash) {

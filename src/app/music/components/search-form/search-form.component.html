@@ -1,14 +1,19 @@
-
-
 <div class="form-group mb-3" [formGroup]="queryForm">
 
-  <input class="form-control" 
-        placeholder="Search" 
-        formControlName="query">
+  <input class="form-control" placeholder="Search" formControlName="query">
+
+
+  <ng-container *ngIf="queryForm.get('query') as field">
+
+    <div *ngIf="field.hasError('required')">
+      Field is required
+    </div>
+
+    <div *ngIf="field.getError('minlength') as error">
+      Minimum length is {{error.requiredLength}} characters
+    </div>
+    
+  </ng-container>
 
 
 </div>
-
-
-
-
