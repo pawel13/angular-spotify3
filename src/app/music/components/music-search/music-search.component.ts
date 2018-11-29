@@ -3,11 +3,12 @@ import { Album } from "../../../model/Album";
 import { MusicSearchService } from "../../services/music-search.service";
 import { Subscription, Subject } from "rxjs";
 import { takeUntil, tap, catchError } from "rxjs/operators";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-music-search",
   templateUrl: "./music-search.component.html",
-  styleUrls: ["./music-search.component.scss"],
+  styleUrls: ["./music-search.component.scss"]
   // viewProviders:[MusicSearchService]
 })
 export class MusicSearchComponent implements OnInit {
@@ -19,15 +20,23 @@ export class MusicSearchComponent implements OnInit {
     }),
     catchError(error => (this.message = error.message))
   );
-  query$ = this.service.getQuery()
+  query$ = this.service.getQuery();
 
   message: string;
 
-  constructor(private service: MusicSearchService) {}
+  constructor(
+    private service: MusicSearchService,
+    private route: ActivatedRoute,
+  ) {}
+
+  ngOnInit() {
+    const query = this.route.snapshot.queryParamMap.get("q");
+    if (query) {
+      this.search(query);
+    }
+  }
 
   search(query: string) {
     this.service.search(query);
   }
-
-  ngOnInit() {}
 }
