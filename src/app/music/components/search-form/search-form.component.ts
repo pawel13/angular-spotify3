@@ -5,7 +5,10 @@ import {
   FormArray,
   AbstractControl,
   FormBuilder,
-  Validators
+  Validators,
+  ValidatorFn,
+  Validator,
+  ValidationErrors
 } from "@angular/forms";
 import { distinctUntilChanged, filter, debounceTime } from "rxjs/operators";
 
@@ -18,23 +21,37 @@ export class SearchFormComponent implements OnInit {
   queryForm: FormGroup;
 
   constructor() {
+
+    const censor = (badword: string): ValidatorFn =>
+      //
+      (control: AbstractControl): ValidationErrors | null => {
+        //
+        const hasError = (control.value as string).includes(badword);
+
+        return hasError
+          ? {
+              censor: { badword }
+            }
+          : null;
+      };
+
     this.queryForm = new FormGroup({
-      query: new FormControl("",[
+      query: new FormControl("", [
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(3),
+        censor("batman")
       ])
     });
 
+    (window as any)["form"] = this.queryForm;
     console.log(this.queryForm);
 
     this.queryForm
       .get("query")!
       .valueChanges.pipe(
-
         debounceTime(400),
         distinctUntilChanged(),
         filter(query => query.length >= 3)
-      
       )
       .subscribe(query => {
         this.search(query);
