@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { Album } from "../../../model/Album";
 import { MusicSearchService } from "../../services/music-search.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-music-search",
@@ -14,14 +15,21 @@ export class MusicSearchComponent implements OnInit {
   constructor(private service: MusicSearchService) {}
 
   search(query: string) {
-    this.service.search(query)
+    this.service.search(query);
   }
 
+  sub: Subscription;
+
   ngOnInit() {
-      
-    this.service.getAlbums().subscribe(
-      albums => (this.albums = albums),
-      error => (this.message = error.message)
-    );
+    this.sub = this.service
+      .getAlbums()
+      .subscribe(
+        albums => (this.albums = albums),
+        error => (this.message = error.message)
+      );
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe()
   }
 }

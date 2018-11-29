@@ -82,7 +82,7 @@ export class SearchFormComponent implements OnInit {
       )
     });
 
-    console.log(this.queryForm);
+    // console.log(this.queryForm);
     ///
 
     const value$ = this.queryForm.get("query")!.valueChanges.pipe(
