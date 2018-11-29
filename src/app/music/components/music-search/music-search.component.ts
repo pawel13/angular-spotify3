@@ -8,7 +8,7 @@ import { takeUntil, tap, catchError } from "rxjs/operators";
   selector: "app-music-search",
   templateUrl: "./music-search.component.html",
   styleUrls: ["./music-search.component.scss"],
-  viewProviders:[MusicSearchService]
+  // viewProviders:[MusicSearchService]
 })
 export class MusicSearchComponent implements OnInit {
   albums: Album[];

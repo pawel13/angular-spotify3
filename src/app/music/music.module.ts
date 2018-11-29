@@ -10,13 +10,15 @@ import { environment } from "../../environments/environment";
 import { SEARCH_URL } from "./services/music-search.service";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MusicProviderDirective } from './music-provider.directive';
 
 @NgModule({
   declarations: [
     MusicSearchComponent,
     SearchFormComponent,
     AlbumsGridComponent,
-    AlbumCardComponent
+    AlbumCardComponent,
+    MusicProviderDirective
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     HttpClientModule,
     ReactiveFormsModule
   ],
-  exports: [MusicSearchComponent],
+  exports: [MusicSearchComponent, MusicProviderDirective],
   providers: [
     {
       provide: SEARCH_URL,

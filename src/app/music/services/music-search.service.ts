@@ -40,9 +40,13 @@ export class MusicSearchService {
       .subscribe(albums => this.albumsChange.next(albums));
   }
 
+  /* Commands */
+
   search(query: string): any {
     this.queryChange.next(query);
   }
+
+  /* Queries */
 
   getAlbums() {
     return this.albumsChange.asObservable();
