@@ -1,7 +1,12 @@
-import { Injectable, Inject, InjectionToken, EventEmitter } from "@angular/core";
-import { AlbumsResponse, Album } from '../../model/Album';
+import {
+  Injectable,
+  Inject,
+  InjectionToken,
+  EventEmitter
+} from "@angular/core";
+import { AlbumsResponse, Album } from "../../model/Album";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map, concat, startWith } from "rxjs/operators";
 import { of } from "rxjs";
 
 export const SEARCH_URL = new InjectionToken("Search API Url");
@@ -10,15 +15,12 @@ export const SEARCH_URL = new InjectionToken("Search API Url");
   providedIn: "root"
 })
 export class MusicSearchService {
-  // albums: Album[] = [];
-
   constructor(
     @Inject(SEARCH_URL) private search_url: string,
     private http: HttpClient
   ) {}
 
   search(query: string): any {
-
     this.http
       .get<AlbumsResponse>(this.search_url, {
         params: {
@@ -27,14 +29,22 @@ export class MusicSearchService {
         }
       })
       .pipe(map(resp => resp.albums.items))
-      .subscribe( albums => {
-        this.albumsChange.emit(albums)
-      })
+      .subscribe(albums => {
+        this.albums = albums;
+        this.albumsChange.emit(albums);
+      });
   }
-  
-  albumsChange = new EventEmitter<Album[]>()
+
+  albums: Album[] = [];
+  albumsChange = new EventEmitter<Album[]>();
 
   getAlbums() {
-    return this.albumsChange.asObservable()
+    // return this.albumsChange.asObservable();
+    // return of(this.albums).pipe(
+    //   concat(this.albumsChange)
+    // );
+    return this.albumsChange.pipe(
+      startWith(this.albums)
+    )
   }
 }
