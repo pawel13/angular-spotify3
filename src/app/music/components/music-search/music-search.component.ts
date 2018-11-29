@@ -43,7 +43,8 @@ export class MusicSearchComponent implements OnInit {
     this.router.navigate(["/music"], {
       queryParams: {
         q: query
-      }
+      },
+      replaceUrl:true
     });
   }
 }
