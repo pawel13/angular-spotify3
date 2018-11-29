@@ -3,7 +3,7 @@ import { Album } from "../../../model/Album";
 import { MusicSearchService } from "../../services/music-search.service";
 import { Subscription, Subject } from "rxjs";
 import { takeUntil, tap, catchError } from "rxjs/operators";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-music-search",
@@ -27,6 +27,7 @@ export class MusicSearchComponent implements OnInit {
   constructor(
     private service: MusicSearchService,
     private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,5 +39,11 @@ export class MusicSearchComponent implements OnInit {
 
   search(query: string) {
     this.service.search(query);
+
+    this.router.navigate(["/music"], {
+      queryParams: {
+        q: query
+      }
+    });
   }
 }
