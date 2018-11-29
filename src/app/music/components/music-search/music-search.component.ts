@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { Album } from "../../../model/Album";
 import { MusicSearchService } from "../../services/music-search.service";
-import { Subscription } from "rxjs";
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-music-search",
@@ -18,20 +19,19 @@ export class MusicSearchComponent implements OnInit {
     this.service.search(query);
   }
 
-  sub = new Subscription();
+  destroy = new Subject();
 
   ngOnInit() {
-    this.sub.add(
-      this.service
-        .getAlbums()
-        .subscribe(
-          albums => (this.albums = albums),
-          error => (this.message = error.message)
-        )
-    );
+    this.service
+      .getAlbums()
+      .pipe(takeUntil(this.destroy))
+      .subscribe(
+        albums => (this.albums = albums),
+        error => (this.message = error.message)
+      );
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.destroy.next()
   }
 }
