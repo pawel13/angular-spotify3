@@ -12,8 +12,17 @@
     <div *ngIf="field.getError('minlength') as error">
       Minimum length is {{error.requiredLength}} characters
     </div>
-    
+
   </ng-container>
 
 
 </div>
+
+
+<!-- 
+  Reusable form messages component example:
+  ---
+  <form-messages [field]="queryForm.get('query')">
+    <div *ngIf="queryForm.get('query').hasError('special_error')">
+    </div>
+  </form-messages> -->
