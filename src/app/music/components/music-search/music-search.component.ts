@@ -31,8 +31,9 @@ export class MusicSearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+
     this.route.queryParamMap.subscribe(queryParamMap => {
+      
       const query = queryParamMap.get("q");
       if (query) {
         this.search(query);

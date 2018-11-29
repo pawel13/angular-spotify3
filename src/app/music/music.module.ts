@@ -11,6 +11,7 @@ import { SEARCH_URL } from "./services/music-search.service";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MusicProviderDirective } from './music-provider.directive';
+import { AlbumDetailsComponent } from './components/album-details/album-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MusicProviderDirective } from './music-provider.directive';
     SearchFormComponent,
     AlbumsGridComponent,
     AlbumCardComponent,
-    MusicProviderDirective
+    MusicProviderDirective,
+    AlbumDetailsComponent
   ],
   imports: [
     CommonModule,
