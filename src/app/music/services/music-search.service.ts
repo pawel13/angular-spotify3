@@ -7,7 +7,7 @@ import {
 import { AlbumsResponse, Album } from "../../model/Album";
 import { HttpClient } from "@angular/common/http";
 import { map, concat, startWith } from "rxjs/operators";
-import { of, Subject } from "rxjs";
+import { of, Subject, ReplaySubject, BehaviorSubject } from "rxjs";
 
 export const SEARCH_URL = new InjectionToken("Search API Url");
 
@@ -30,21 +30,14 @@ export class MusicSearchService {
       })
       .pipe(map(resp => resp.albums.items))
       .subscribe(albums => {
-        this.albums = albums;
         this.albumsChange.next(albums);
       });
   }
 
-  albums: Album[] = [];
-  albumsChange = new Subject<Album[]>();
+  // albumsChange = new ReplaySubject<Album[]>(1);
+  albumsChange = new BehaviorSubject<Album[]>([]);
 
   getAlbums() {
-    // return this.albumsChange.asObservable();
-    // return of(this.albums).pipe(
-    //   concat(this.albumsChange)
-    // );
-    return this.albumsChange.pipe(
-      startWith(this.albums)
-    )
+    return this.albumsChange.asObservable();
   }
 }
