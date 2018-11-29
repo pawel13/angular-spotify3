@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, EventEmitter } from "@angular/core";
 import { Album } from "../../../model/Album";
 import { MusicSearchService } from "../../services/music-search.service";
 import { Subscription, Subject } from "rxjs";
-import { takeUntil, tap } from "rxjs/operators";
+import { takeUntil, tap, catchError } from "rxjs/operators";
 
 @Component({
   selector: "app-music-search",
@@ -11,11 +11,14 @@ import { takeUntil, tap } from "rxjs/operators";
 })
 export class MusicSearchComponent implements OnInit {
   albums: Album[];
+
   albums$ = this.service.getAlbums().pipe(
     tap(albums => {
       this.albums = albums;
-    })
+    }),
+    catchError(error => (this.message = error.message))
   );
+
   message: string;
 
   constructor(private service: MusicSearchService) {}
