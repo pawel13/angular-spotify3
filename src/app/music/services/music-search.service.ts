@@ -6,7 +6,7 @@ import {
 } from "@angular/core";
 import { AlbumsResponse, Album } from "../../model/Album";
 import { HttpClient } from "@angular/common/http";
-import { map, concat, startWith } from "rxjs/operators";
+import { map, concat, startWith, switchAll, switchMap } from "rxjs/operators";
 import { of, Subject, ReplaySubject, BehaviorSubject } from "rxjs";
 
 export const SEARCH_URL = new InjectionToken("Search API Url");
@@ -16,29 +16,29 @@ export const SEARCH_URL = new InjectionToken("Search API Url");
 })
 export class MusicSearchService {
   albumsChange = new BehaviorSubject<Album[]>([]);
-  queryChange = new BehaviorSubject<string>('batman');
+  queryChange = new BehaviorSubject<string>("batman");
 
   constructor(
     @Inject(SEARCH_URL) private search_url: string,
     private http: HttpClient
   ) {
-    console.log(this.albumsChange);
+    this.queryChange
+      .pipe(
+        map(query => ({
+          type: "album",
+          q: query
+        })),
+        switchMap(params =>
+          this.http.get<AlbumsResponse>(this.search_url, { params })
+        ),
+        // switchAll(),
+        map(resp => resp.albums.items)
+      )
+      .subscribe(albums => this.albumsChange.next(albums));
   }
 
   search(query: string): any {
-    this.queryChange.next(query)
-
-    this.http
-      .get<AlbumsResponse>(this.search_url, {
-        params: {
-          type: "album",
-          q: query
-        }
-      })
-      .pipe(map(resp => resp.albums.items))
-      .subscribe(albums => {
-        this.albumsChange.next(albums);
-      });
+    this.queryChange.next(query);
   }
 
   getAlbums() {

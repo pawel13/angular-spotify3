@@ -32,7 +32,7 @@ export class SearchFormComponent implements OnInit {
   set query(value: string) {
     this.queryForm.get("query")!.setValue(value, {
       emitEvent: false,
-      onlySelf: true
+      onlySelf: true,
     });
   }
 
