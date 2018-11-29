@@ -14,13 +14,14 @@ export class MusicSearchComponent implements OnInit {
   constructor(private service: MusicSearchService) {}
 
   search(query: string) {
-    
-    this.service.getAlbums(query).subscribe(
-      albums => (this.albums = albums),
+    this.service.search(query)
+  }
 
+  ngOnInit() {
+      
+    this.service.getAlbums().subscribe(
+      albums => (this.albums = albums),
       error => (this.message = error.message)
     );
   }
-
-  ngOnInit() {}
 }
