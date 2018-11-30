@@ -7,13 +7,17 @@ import { PlaylistDetailsComponent } from "./components/playlist-details/playlist
 
 import { FormsModule } from "@angular/forms";
 import { SharedModule } from '../shared/shared.module';
+import { PlaylistsListComponent } from './containers/playlists-list/playlists-list.component';
+import { SelectedPlaylistComponent } from './containers/selected-playlist/selected-playlist.component';
 
 @NgModule({
   declarations: [
     PlaylistsViewComponent,
     ItemsListComponent,
     ListItemComponent,
-    PlaylistDetailsComponent
+    PlaylistDetailsComponent,
+    PlaylistsListComponent,
+    SelectedPlaylistComponent
   ],
   imports: [CommonModule, FormsModule, SharedModule],
   entryComponents:[PlaylistsViewComponent],
