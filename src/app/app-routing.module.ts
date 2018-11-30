@@ -17,14 +17,9 @@ const routes: Routes = [
     component: PlaylistsViewComponent
   },
   {
-    path: "music",
-    component: MusicSearchComponent
+    path: 'music',
+    loadChildren: './music/music.module#MusicModule'
   },
-  {
-    path: "music/:id",
-    component: AlbumDetailsComponent
-  },
-
   {
     path: "**",
     // component: PageNotFoundComponent,

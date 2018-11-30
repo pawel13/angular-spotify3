@@ -16,7 +16,7 @@ import { SecurityModule } from './security/security.module';
     BrowserModule,
     PlaylistsModule,
     SharedModule,
-    MusicModule,
+    // MusicModule,
     SecurityModule,
     AppRoutingModule,
 
