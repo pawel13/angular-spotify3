@@ -7,7 +7,7 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
 import { AlbumsGridComponent } from "./components/albums-grid/albums-grid.component";
 import { AlbumCardComponent } from "./components/album-card/album-card.component";
 import { environment } from "../../environments/environment";
-import { SEARCH_URL } from "./services/music-search.service";
+import { SEARCH_URL, MusicSearchService } from "./services/music-search.service";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MusicProviderDirective } from './music-provider.directive';
@@ -33,7 +33,7 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
     {
       provide: SEARCH_URL,
       useValue: environment.api_url
-    }
+    },
     // {
     //   provide: MusicSearchService,
     //   useFactory: (url: string) => {
@@ -46,7 +46,7 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
     //   useClass: MusicSearchService,
     //   // deps: [SEARCH_URL]
     // },
-    // MusicSearchService
+    MusicSearchService
   ]
 })
 export class MusicModule {}
