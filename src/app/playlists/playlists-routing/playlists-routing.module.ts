@@ -32,6 +32,9 @@ const routes: Routes = [
       // concrete playlist
       {
         path: ":id",
+        resolve: {
+              playlist: PlaylistResolverService
+        },
         children: [
           {
             path: '',
@@ -40,10 +43,7 @@ const routes: Routes = [
           },
           {
             path: '',
-            component: SelectedPlaylistComponent, 
-            resolve: {
-              playlist: PlaylistResolverService
-            }
+            component: SelectedPlaylistComponent
           }
         ]
 
