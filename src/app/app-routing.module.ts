@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { PlaylistsViewComponent } from "./playlists/components/playlists-view/playlists-view.component";
 import { MusicSearchComponent } from "./music/components/music-search/music-search.component";
 import { AlbumDetailsComponent } from "./music/components/album-details/album-details.component";
+import { SelectedPlaylistComponent } from "./playlists/containers/selected-playlist/selected-playlist.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,16 @@ const routes: Routes = [
   {
     path: "music/:id",
     component: AlbumDetailsComponent
+  },
+  {
+    path: "playlists",
+    component: PlaylistsViewComponent,
+    children: [
+      {
+        path: ":id",
+        component: SelectedPlaylistComponent
+      }
+    ]
   },
   {
     path: "**",

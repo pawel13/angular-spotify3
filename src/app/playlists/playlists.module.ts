@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { SharedModule } from '../shared/shared.module';
 import { PlaylistsListComponent } from './containers/playlists-list/playlists-list.component';
 import { SelectedPlaylistComponent } from './containers/selected-playlist/selected-playlist.component';
+import { PlaylistsRoutingModule } from "./playlists-routing/playlists-routing.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { SelectedPlaylistComponent } from './containers/selected-playlist/select
     PlaylistsListComponent,
     SelectedPlaylistComponent
   ],
-  imports: [CommonModule, FormsModule, SharedModule],
+  imports: [CommonModule, FormsModule, SharedModule, PlaylistsRoutingModule],
   entryComponents:[PlaylistsViewComponent],
   exports: [PlaylistsViewComponent]
 })
