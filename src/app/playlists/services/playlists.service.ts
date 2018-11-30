@@ -29,6 +29,12 @@ export class PlaylistsService {
 
   constructor() { }
 
+  selected = new BehaviorSubject<Playlist | undefined>(undefined);
+
+  selectPlaylist(playlist: Playlist){
+    this.selected.next(playlist);
+  }
+
   getPlaylists(): Observable<Playlist[]>{
     return this.playlists.asObservable();
   }

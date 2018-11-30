@@ -15,9 +15,10 @@ import { Playlist } from 'src/app/model/Playlist';
 })
 export class SelectedPlaylistComponent implements OnInit {
 
-  playlist$: Observable<Playlist | undefined> = this.route.data.pipe(
+  playlist$: Observable<Playlist | undefined> = this.service.selected;
+ /*  this.route.data.pipe(
     pluck<Data, Playlist>('playlist')
-  )
+  ) */
 
 
   constructor(private service: PlaylistsService, private route: ActivatedRoute, private router: Router) { }
@@ -39,6 +40,7 @@ export class SelectedPlaylistComponent implements OnInit {
 
   save(playlist: Playlist) {
     this.service.save(playlist);
+    this.service.selectPlaylist(playlist);
 /*     this.router.navigate(['/playlists']);
     // load playlist again
     this.loadPlaylist(); */

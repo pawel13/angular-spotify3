@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { Playlist } from "src/app/model/Playlist";
 import { NgForm } from "@angular/forms";
+import { PlaylistsService } from "../../services/playlists.service";
+import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 
 @Component({
   selector: "app-playlist-details",
@@ -38,8 +40,8 @@ export class PlaylistDetailsComponent implements OnInit {
       ...this.playlist,
       ...draft
     }
-   
-    this.playlistChange.emit(playlist)
+    this.playlistChange.emit(playlist);
+
   }
 }
 
