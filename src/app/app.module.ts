@@ -8,10 +8,12 @@ import { SharedModule } from './shared/shared.module';
 import { MusicModule } from './music/music.module';
 import { SecurityModule } from './security/security.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
