@@ -4,6 +4,7 @@ import { PlaylistsViewComponent } from '../components/playlists-view/playlists-v
 import { SelectedPlaylistComponent } from '../containers/selected-playlist/selected-playlist.component';
 import { PlaylistsListComponent } from '../containers/playlists-list/playlists-list.component';
 import { MessageComponent } from '../components/message/message.component';
+import { PlaylistResolverService } from '../resolvers/playlist-resolver.service';
 
 const routes: Routes = [
   {
@@ -39,7 +40,10 @@ const routes: Routes = [
           },
           {
             path: '',
-            component: SelectedPlaylistComponent
+            component: SelectedPlaylistComponent, 
+            resolve: {
+              playlist: PlaylistResolverService
+            }
           }
         ]
 
