@@ -8,7 +8,7 @@ import { Playlist } from 'src/app/model/Playlist';
 @Component({
   selector: 'app-selected-playlist',
   template: `
-    <app-playlist-details [playlist]="playlist$ | async">
+    <app-playlist-details [playlist]="playlist$ | async" (playlistChange)="save($event)">
     </app-playlist-details>
   `,
   styles: []
@@ -27,6 +27,10 @@ export class SelectedPlaylistComponent implements OnInit {
       switchMap( id =>this.service.getPlaylist(id) ),
       //share()
     )
+  }
+
+  save(playlist: Playlist) {
+    this.service.save(playlist);
   }
 
 }

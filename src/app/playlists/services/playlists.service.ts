@@ -40,4 +40,10 @@ export class PlaylistsService {
     return of(playlist);
   }
 
+  save(playlist: Playlist){
+    let playlists = this.playlists.getValue();
+    playlists = playlists.map( p => p.id == playlist.id ? playlist : p);
+    this.playlists.next(playlists);
+  }
+
 }
