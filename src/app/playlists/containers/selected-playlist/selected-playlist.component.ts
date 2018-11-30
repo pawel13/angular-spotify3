@@ -19,27 +19,40 @@ export class SelectedPlaylistComponent implements OnInit {
 
   constructor(private service: PlaylistsService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
+  loadPlaylist() {
     this.playlist$ = this.route.paramMap.pipe(
-      map( paramMap => paramMap.get('id')),
-      filter( id => id !== null),
+      map(paramMap => paramMap.get('id')),
+      filter(id => id !== null),
       map(id => parseInt(id!)),
-      switchMap( id =>this.service.getPlaylist(id) ),
+      switchMap(id => this.service.getPlaylist(id)),
       //share()
     )
+  }
+
+  ngOnInit() {
+    this.loadPlaylist();
+/*     this.playlist$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('id')),
+      filter(id => id !== null),
+      map(id => parseInt(id!)),
+      switchMap(id => this.service.getPlaylist(id)),
+      //share()
+      ) */
+    
   }
 
   save(playlist: Playlist) {
     this.service.save(playlist);
     this.router.navigate(['/playlists']);
     // load playlist again
-    this.playlist$ = 
+    this.loadPlaylist();
+/*     this.playlist$ =
       this.route.paramMap.pipe(
         map(paramMap => paramMap.get('id')),
         map(id => parseInt(id!)),
         switchMap(id => this.service.getPlaylist(id))
-      )
-    
+      ) */
+
   }
 
 }
