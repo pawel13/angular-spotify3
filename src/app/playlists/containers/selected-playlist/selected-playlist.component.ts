@@ -31,6 +31,14 @@ export class SelectedPlaylistComponent implements OnInit {
 
   save(playlist: Playlist) {
     this.service.save(playlist);
+    // load playlist again
+    this.playlist$ = 
+      this.route.paramMap.pipe(
+        map(paramMap => paramMap.get('id')),
+        map(id => parseInt(id!)),
+        switchMap(id => this.service.getPlaylist(id))
+      )
+    
   }
 
 }
