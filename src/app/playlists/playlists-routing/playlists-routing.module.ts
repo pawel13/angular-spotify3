@@ -18,13 +18,13 @@ const routes: Routes = [
           component: PlaylistsListComponent,
           outlet: "list"
         },
-        {
+        /* {
           path: "",
           component: MessageComponent,
           data: {
             message: 'Please select playlist'
           }
-        }
+        } */
 
         ]
       },
