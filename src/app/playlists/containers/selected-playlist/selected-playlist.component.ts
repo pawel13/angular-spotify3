@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../../services/playlists.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
 import { switchMap, map, filter, share, pluck } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Playlist } from 'src/app/model/Playlist';
@@ -16,7 +16,7 @@ import { Playlist } from 'src/app/model/Playlist';
 export class SelectedPlaylistComponent implements OnInit {
 
   playlist$: Observable<Playlist | undefined> = this.route.data.pipe(
-    pluck('playlist')
+    pluck<Data, Playlist>('playlist')
   )
 
 

@@ -32,6 +32,7 @@ const routes: Routes = [
       // concrete playlist
       {
         path: ":id",
+        runGuardsAndResolvers: 'always',
         resolve: {
               playlist: PlaylistResolverService
         },

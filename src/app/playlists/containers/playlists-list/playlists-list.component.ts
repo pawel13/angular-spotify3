@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../../services/playlists.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Data } from '@angular/router';
 import { Playlist } from 'src/app/model/Playlist';
 import { map, switchMap, pluck } from 'rxjs/operators';
 
@@ -20,9 +20,9 @@ export class PlaylistsListComponent implements OnInit {
   playlists$ = this.service.getPlaylists();
 
   selected$ = this.route.data.pipe(
-    pluck('playlist')
+    pluck<Data, Playlist>('playlist')
   )
-  
+
 /*   this.route.paramMap.pipe(
     map(paramMap => paramMap.get('id')),
     map(id => parseInt(id!)),
