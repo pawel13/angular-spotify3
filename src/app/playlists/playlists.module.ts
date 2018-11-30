@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PlaylistsListComponent } from './containers/playlists-list/playlists-list.component';
 import { SelectedPlaylistComponent } from './containers/selected-playlist/selected-playlist.component';
 import { PlaylistsRoutingModule } from "./playlists-routing/playlists-routing.module";
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PlaylistsRoutingModule } from "./playlists-routing/playlists-routing.mo
     ListItemComponent,
     PlaylistDetailsComponent,
     PlaylistsListComponent,
-    SelectedPlaylistComponent
+    SelectedPlaylistComponent,
+    MessageComponent
   ],
   imports: [CommonModule, FormsModule, SharedModule, PlaylistsRoutingModule],
   entryComponents:[PlaylistsViewComponent],

@@ -6,8 +6,8 @@
       [selected]="selected"
       (selectedChange)=" selected = $event ">
   </app-items-list> -->
-  <app-playlists-list></app-playlists-list>
-
+  <!-- <app-playlists-list></app-playlists-list> -->
+  <router-outlet name="list"></router-outlet>
   </div>
   <div class="col">
     <!--
@@ -18,6 +18,9 @@
   -->
 
   <!-- <app-selected-playlist></app-selected-playlist> -->
-  <router-outlet></router-outlet>
+  <router-outlet #ra="outlet"></router-outlet>
+  <div *ngIf="!ra.isActivated">
+    Please select playlist
+  </div>
   </div> 
 </div>
