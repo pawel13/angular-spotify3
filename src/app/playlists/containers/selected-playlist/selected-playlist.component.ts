@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../../services/playlists.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, map, filter, share } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Playlist } from 'src/app/model/Playlist';
@@ -17,7 +17,7 @@ export class SelectedPlaylistComponent implements OnInit {
 
   playlist$: Observable<Playlist | undefined>;
 
-  constructor(private service: PlaylistsService, private route: ActivatedRoute) { }
+  constructor(private service: PlaylistsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.playlist$ = this.route.paramMap.pipe(
@@ -31,6 +31,7 @@ export class SelectedPlaylistComponent implements OnInit {
 
   save(playlist: Playlist) {
     this.service.save(playlist);
+    this.router.navigate(['/playlists']);
     // load playlist again
     this.playlist$ = 
       this.route.paramMap.pipe(
