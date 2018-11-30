@@ -12,6 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MusicProviderDirective } from './music-provider.directive';
 import { AlbumDetailsComponent } from './components/album-details/album-details.component';
+import { SecurityModule } from "../security/security.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
   imports: [
     CommonModule,
     MusicRoutingModule,
-    HttpClientModule,
+    //HttpClientModule,
+    //SecurityModule.forChild(),
     ReactiveFormsModule
   ],
   exports: [MusicSearchComponent, MusicProviderDirective],

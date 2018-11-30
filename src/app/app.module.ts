@@ -7,6 +7,7 @@ import { PlaylistsModule } from './playlists/playlists.module';
 import { SharedModule } from './shared/shared.module';
 import { MusicModule } from './music/music.module';
 import { SecurityModule } from './security/security.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { SecurityModule } from './security/security.module';
     BrowserModule,
     PlaylistsModule,
     SharedModule,
-    // MusicModule,
+    HttpClientModule,
     SecurityModule,
     AppRoutingModule,
 
