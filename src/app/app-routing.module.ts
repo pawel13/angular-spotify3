@@ -24,16 +24,7 @@ const routes: Routes = [
     path: "music/:id",
     component: AlbumDetailsComponent
   },
-  {
-    path: "playlists",
-    component: PlaylistsViewComponent,
-    children: [
-      {
-        path: ":id",
-        component: SelectedPlaylistComponent
-      }
-    ]
-  },
+
   {
     path: "**",
     // component: PageNotFoundComponent,

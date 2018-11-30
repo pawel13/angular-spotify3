@@ -14,11 +14,12 @@ import { SecurityModule } from './security/security.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     PlaylistsModule,
     SharedModule,
     MusicModule,
-    SecurityModule
+    SecurityModule,
+    AppRoutingModule,
+
   ],
   providers: [],
   // entryComponents:[AppComponent],
